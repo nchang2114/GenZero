@@ -26,8 +26,7 @@ export default function Home() {
 
   return (
     <>
-      <main className="page hero">
-        <div className="aurora" aria-hidden />
+      <main className="page">
         <div className="container">
           <div className="reveal" ref={addRef as any}>
             <div className="eyebrow">Future‑Forward Game Studio</div>

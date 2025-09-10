@@ -24,7 +24,7 @@ export default function About() {
             <h1 className="section-title">Independent, technical, and relentlessly polished</h1>
             <p className="muted">GenZero is a distributed team of engineers, artists, and designers building games with long‑term support in mind. We ship fast, iterate in public, and treat craft as a competitive edge.</p>
           </div>
-          <div className="grid" style={{marginTop:20}}>
+          <div className="grid">
             <article className="card reveal" ref={addRef as any}>
               <h3>Our Focus</h3>
               <p className="meta">Systems‑driven design, competitive depth, and feel‑good controls.</p>

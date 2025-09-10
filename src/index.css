@@ -38,6 +38,17 @@ html,body,#root{height:100%}
   /* Consistent top spacing below sticky header */
   padding: var(--space-16) 0 0;
 }
+/* Ensure comfortable space before footer across pages */
+.page > .container{ padding-bottom: clamp(48px, 10vh, 72px) }
+@supports (height: 100svh){ .page > .container{ padding-bottom: clamp(48px, 10svh, 72px) } }
+/* Avoid double bottom padding when the last block is a <section> */
+.page > .container > section:last-of-type{ padding-bottom: 0 }
+/* Home layout: drive gradient from the page element so it scales with content */
+.page.hero{
+  background:
+    radial-gradient(160vw 125vh at 50% 8%, rgba(124,77,255,0.12), transparent 65%),
+    var(--bg);
+}
 /* Trim accidental last-child margins to avoid big gaps before footer */
 .page .container > :last-child{ margin-bottom: 0 }
 
@@ -49,10 +60,8 @@ body{
   margin:0;
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica Neue, Arial, sans-serif;
   color:var(--text);
-  /* Single, viewport‑scaled gradient for consistent background */
-  background:
-    radial-gradient(160vw 120vh at 50% 8%, rgba(124,77,255,0.12), transparent 65%),
-    var(--bg);
+  /* Base only; page backgrounds handle gradients for better control */
+  background: var(--bg);
   overflow-x:hidden;
 }
 
@@ -69,14 +78,16 @@ body::before{
     linear-gradient(var(--line) 1px, transparent 1px),
     linear-gradient(90deg, var(--line) 1px, transparent 1px);
   background-size: 60px 60px, 60px 60px;
-  opacity:.12;
+  opacity:.1;
 }
 
 /* Aurora glow */
 .aurora{
-  position:fixed; inset:-20vh -20vw; z-index:-1;
-  background: conic-gradient(from 180deg at 50% 50%, rgba(124,77,255,0.15), rgba(0,229,255,0.12), rgba(255,30,156,0.12), rgba(124,77,255,0.15));
-  filter: blur(48px) saturate(120%);
+  position:fixed; inset:-25vh -25vw; z-index:-1;
+  background: conic-gradient(from 180deg at 50% 50%, rgba(124,77,255,0.14), rgba(0,229,255,0.10), rgba(255,30,156,0.10), rgba(124,77,255,0.14));
+  filter: blur(56px) saturate(120%);
+  -webkit-mask-image: radial-gradient(140% 95% at 50% 20%, rgba(0,0,0,1) 0 62%, transparent 85%);
+          mask-image: radial-gradient(140% 95% at 50% 20%, rgba(0,0,0,1) 0 62%, transparent 85%);
   animation: drift 26s linear infinite;
 }
 @keyframes drift{
@@ -133,9 +144,38 @@ section{padding: clamp(48px, 10vh, 72px) 0}
 @media (max-width: 1024px){ .card{grid-column:span 6} }
 @media (max-width: 640px){ .card{grid-column:span 12} .nav-links{display:none} }
 
+/* Tablet tuning */
+@media (max-width: 768px){
+  .container{ padding: 0 20px }
+  /* Center hero content and CTAs on smaller widths */
+  .hero .container{ text-align:center }
+  .hero-ctas{ justify-content:center }
+  /* Make grids two-up for readability */
+  .card{ grid-column: span 6 }
+  .game{ grid-column: span 6 }
+  .role{ grid-column: span 6 }
+  .stat{ grid-column: span 6 }
+  /* Tighter vertical rhythm */
+  .grid{ margin-top: var(--space-6) }
+  .hero-extra{ margin-top: var(--space-8) }
+  /* Scale page gradient a bit larger for narrow widths */
+  .page.hero{ background: radial-gradient(190vw 150vh at 50% 10%, rgba(124,77,255,0.13), transparent 70%), var(--bg) }
+}
+
 /* Section headings */
-.section-title{font-size: clamp(1.6rem, 3.5vw, 2.4rem); margin:0 0 var(--space-3)}
+.section-title{font-size: clamp(1.6rem, 3.5vw, 2.4rem); margin:0 0 var(--space-4)}
 .section-kicker{color:var(--muted); text-transform:uppercase; letter-spacing:.28em; font-size:.75rem}
+
+/* Typographic rhythm and readable measure */
+.container p{ line-height: 1.7; max-width: 72ch }
+.container .muted{ line-height: 1.7 }
+/* Space relationships for common sequences */
+.section-kicker + .section-title{ margin-top: var(--space-2) }
+.section-title + .muted{ margin-top: var(--space-3) }
+
+/* Generic h3 spacing outside of cards for legal/longform pages */
+.container h3{ margin: var(--space-6) 0 var(--space-2) }
+.card h3{ margin: var(--space-2) 0 var(--space-3) } /* keep card-specific */
 
 /* Games */
 .games{display:grid; grid-template-columns:repeat(12,1fr); gap: var(--space-6); margin-top: clamp(var(--space-6), 5vh, var(--space-8))}
@@ -174,10 +214,18 @@ section{padding: clamp(48px, 10vh, 72px) 0}
 @media (max-width: 640px){
   .page{ padding-top: var(--space-12) }
   .container{ padding: 0 16px }
-  .games{ gap: var(--space-4); margin-top: var(--space-6) }
+  .hero{ padding-top: clamp(48px, 16vh, 96px) }
+  @supports (height: 100svh){ .hero{ padding-top: clamp(48px, 16svh, 96px) } }
+  .grid{ margin-top: clamp(var(--space-4), 4vh, var(--space-6)) }
+  .games{ gap: var(--space-4); margin-top: clamp(var(--space-4), 4vh, var(--space-6)) }
   .contact{ gap: var(--space-4); margin-top: var(--space-6); margin-bottom: var(--space-6) }
   .contact-card, .contact-side{ padding: var(--space-4) }
   .contact-card .btn{ width:100%; justify-content:center; justify-self:stretch }
+  /* Reduce overlays/aurora to avoid banding on small screens */
+  body::before{ opacity:.06 }
+  .aurora{ display:none }
+  /* Increase page gradient scale for very small widths */
+  .page.hero{ background: radial-gradient(220vw 180vh at 50% 12%, rgba(124,77,255,0.14), transparent 72%), var(--bg) }
 }
 
 /* Prefer stable viewport units where supported */
@@ -204,6 +252,11 @@ footer{
 .social{display:flex; gap: var(--space-3)}
 .social a{color:var(--muted); text-decoration:none}
 .social a:hover{color:var(--text)}
+
+/* Footer layout on small screens: stack neatly */
+@media (max-width: 640px){
+  .footer-inner{ flex-direction: column; align-items: flex-start; gap: var(--space-3) }
+}
 
 /* Reveal on scroll */
 .reveal{opacity:0; transform:translateY(12px); transition: opacity .6s ease, transform .6s ease}
