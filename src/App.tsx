@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
 import Games from './pages/Games'
@@ -10,6 +10,7 @@ import Press from './pages/Press'
 import Brand from './pages/Brand'
 
 function App() {
+  const [menuOpen, setMenuOpen] = useState(false)
   // Cursor glow follows pointer across all pages
   useEffect(() => {
     const onMove = (e: MouseEvent) => {
@@ -22,7 +23,7 @@ function App() {
 
   return (
     <>
-      <header className="nav">
+      <header className={`nav${menuOpen ? ' open' : ''}`}>
         <div className="container nav-inner">
           <Link to="/" className="brand" aria-label="GenZero Home">
             <svg viewBox="0 0 128 128" aria-hidden width="28" height="28">
@@ -37,7 +38,18 @@ function App() {
             </svg>
             <span className="brand-title">GenZero</span>
           </Link>
-          <nav className="nav-links" aria-label="Primary">
+          {/* Mobile nav toggle */}
+          <button
+            className={`nav-toggle`}
+            aria-label="Toggle navigation"
+            aria-expanded={menuOpen}
+            aria-controls="primary-nav"
+            onClick={() => setMenuOpen((v) => !v)}
+          >
+            <span className={`hamburger ${menuOpen ? 'open' : ''}`}></span>
+          </button>
+
+          <nav id="primary-nav" className={`nav-links ${menuOpen ? 'open' : ''}`} aria-label="Primary" onClick={() => setMenuOpen(false)}>
             <Link to="/">Home</Link>
             <Link to="/games">Games</Link>
             <Link to="/about">About Us</Link>
@@ -46,6 +58,13 @@ function App() {
           {/* Removed standalone Contact CTA to keep only nav tabs */}
         </div>
       </header>
+
+      {/* Backdrop for mobile nav; click to close */}
+      <div
+        className={`nav-backdrop${menuOpen ? ' show' : ''}`}
+        onClick={() => setMenuOpen(false)}
+        aria-hidden
+      />
 
       <Routes>
         <Route path="/" element={<Home />} />

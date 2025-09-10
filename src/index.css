@@ -102,8 +102,10 @@ section{padding: clamp(48px, 10vh, 72px) 0}
   position:sticky; top:0; z-index:100; isolation:isolate;
   background: var(--bg-2);
   border-bottom:1px solid rgba(255,255,255,0.08);
+  transition: border-radius .28s ease, box-shadow .28s ease, background-color .28s ease;
 }
 .nav-inner{display:flex; align-items:center; justify-content:space-between; height:64px}
+.nav-inner{ position: relative }
 .brand{display:flex; align-items:center; gap:12px; text-decoration:none; color:var(--text)}
 .brand svg{width:28px; height:28px}
 .brand-title{font-weight:700; letter-spacing:0.08em}
@@ -112,6 +114,19 @@ section{padding: clamp(48px, 10vh, 72px) 0}
 .nav-links a:hover{color:var(--text)}
 .cta{display:inline-flex; align-items:center; justify-content:center; text-align:center; gap: var(--space-3); padding:10px 16px; min-width:120px; border-radius:999px; border:1px solid rgba(255,255,255,0.12); background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02)); color:var(--text); text-decoration:none}
 .cta:hover{border-color:rgba(255,255,255,0.25)}
+
+/* Mobile nav toggle (hamburger) */
+.nav-toggle{ display:none; appearance:none; border:0; background:transparent; color:inherit; width:40px; height:40px; align-items:center; justify-content:center; cursor:pointer; border-radius:8px }
+.nav-toggle:focus-visible{ outline:2px solid rgba(0,229,255,.6); outline-offset:2px }
+.hamburger, .hamburger::before, .hamburger::after{
+  display:block; position:relative; width:22px; height:2px; background: var(--text); border-radius:2px; transition: transform .2s ease, opacity .2s ease
+}
+.hamburger::before, .hamburger::after{ content:""; position:absolute; left:0 }
+.hamburger::before{ transform: translateY(-6px) }
+.hamburger::after{ transform: translateY(6px) }
+.hamburger.open{ transform: rotate(45deg) }
+.hamburger.open::before{ transform: rotate(-90deg) }
+.hamburger.open::after{ opacity:0; transform: translateY(0) }
 
 /* Hero (only top padding so footer matches other pages) */
 .hero{position:relative; padding: clamp(64px, 18vh, 120px) 0 0}
@@ -135,7 +150,56 @@ section{padding: clamp(48px, 10vh, 72px) 0}
 .icon{width:28px; height:28px}
 
 @media (max-width: 1024px){ .card{grid-column:span 6} }
-@media (max-width: 640px){ .card{grid-column:span 12} .nav-links{display:none} }
+@media (max-width: 640px){
+  .card{grid-column:span 12}
+  .nav-toggle{ display:inline-flex }
+
+  /* Overlay dropdown: extends over content, not pushing layout */
+  .nav-links{
+    position: fixed; left:0; right:0; top: var(--header-h);
+    display:flex; flex-direction:column; gap: var(--space-2);
+    background: var(--bg-2);
+    border-bottom:1px solid rgba(255,255,255,0.08);
+    border-bottom-left-radius: 14px; border-bottom-right-radius: 14px;
+    box-shadow: 0 18px 40px rgba(0,0,0,.35);
+    overflow:hidden;
+    max-height: 0; /* collapsed */
+    padding: 0 16px; /* animate padding on open */
+    pointer-events: none;
+    z-index: 110; /* above backdrop and content */
+    will-change: max-height, padding;
+    transition: max-height .5s cubic-bezier(0.22, 1, 0.36, 1), padding .5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .nav-links.open{
+    max-height: 75vh; /* extend as needed */
+    padding: var(--space-3) 16px var(--space-5);
+    pointer-events: auto;
+  }
+  .nav-links a{
+    display:block; color: var(--text); padding:10px 0;
+    opacity: 0; transform: translateY(-4px);
+    transition: opacity .38s ease, transform .38s ease;
+  }
+  .nav-links.open a{ opacity:1; transform: none }
+  .nav-links.open a:nth-child(1){ transition-delay: .05s }
+  .nav-links.open a:nth-child(2){ transition-delay: .09s }
+  .nav-links.open a:nth-child(3){ transition-delay: .13s }
+  .nav-links.open a:nth-child(4){ transition-delay: .17s }
+
+  /* Slight rounding on header when open to match panel */
+  .nav.open{ border-bottom-left-radius: 14px; border-bottom-right-radius: 14px }
+}
+
+/* Backdrop behind open mobile menu */
+.nav-backdrop{ position:fixed; inset: var(--header-h) 0 0 0; background: rgba(0,0,0,.0); opacity:0; pointer-events:none; transition: opacity .4s cubic-bezier(0.22, 1, 0.36, 1), background .4s cubic-bezier(0.22, 1, 0.36, 1); z-index:90 }
+.nav-backdrop.show{ background: rgba(0,0,0,.28); opacity:1; pointer-events:auto }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .nav-links{ transition: none }
+  .nav-links a{ transition: none }
+  .nav-backdrop{ transition: none }
+}
 
 /* Tablet tuning */
 @media (max-width: 768px){
