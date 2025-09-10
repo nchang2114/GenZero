@@ -75,6 +75,9 @@ body::before{
   content: none;
 }
 
+/* Media should never overflow their containers */
+img, svg{ max-width: 100%; height: auto }
+
 /* Aurora glow */
 .aurora{
   position:fixed; inset:-25vh -25vw; z-index:-1;
@@ -107,8 +110,9 @@ section{padding: clamp(48px, 10vh, 72px) 0}
 }
 .nav-inner{display:flex; align-items:center; justify-content:space-between; height:64px}
 .nav-inner{ position: relative }
+.nav-inner > *{ min-width: 0 }
 .brand{display:flex; align-items:center; gap:12px; text-decoration:none; color:var(--text)}
-.brand svg{width:28px; height:28px}
+.brand svg{width: clamp(22px, 6vw, 28px); height: clamp(22px, 6vw, 28px)}
 .brand-title{font-weight:700; letter-spacing:0.08em}
 .nav-links{display:flex; gap: var(--space-5)}
 .nav-links a{color:var(--muted); text-decoration:none; font-weight:600; font-size:0.95rem}
@@ -138,6 +142,7 @@ section{padding: clamp(48px, 10vh, 72px) 0}
 .hero-ctas{display:flex; gap: var(--space-3); margin-top: var(--space-7); flex-wrap:wrap}
 .btn{position:relative; display:inline-flex; align-items:center; gap: var(--space-3); padding:14px 18px; border-radius:12px; border:1px solid rgba(255,255,255,0.12); background:linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03)); color:var(--text); text-decoration:none; font-weight:700}
 .btn:hover{border-color:rgba(255,255,255,0.25)}
+.btn{ flex-wrap: wrap; white-space: normal; min-width: 0; padding: clamp(10px, 2.5vw, 14px) clamp(12px, 3.2vw, 18px) }
 .btn.primary{background: linear-gradient(180deg, rgba(0,229,255,0.22), rgba(124,77,255,0.16)); border-color: rgba(0,229,255,0.35)}
 .btn.primary:hover{box-shadow:0 0 0 3px rgba(0,229,255,0.12), 0 10px 24px rgba(0,229,255,0.15)}
 .btn .dot{width:8px; height:8px; border-radius:50%; background:var(--primary); box-shadow:0 0 12px var(--primary)}
@@ -148,7 +153,10 @@ section{padding: clamp(48px, 10vh, 72px) 0}
 .card{grid-column:span 3; background:var(--card); border:1px solid rgba(255,255,255,0.08); border-radius:16px; padding: var(--space-5); box-shadow:var(--shadow)}
 .card h3{margin: var(--space-2) 0 var(--space-3)}
 .meta{color:var(--muted); font-size:.95rem}
-.icon{width:28px; height:28px}
+.icon{width: clamp(20px, 6vw, 28px); height: clamp(20px, 6vw, 28px)}
+
+/* Allow long inline content to wrap safely */
+p, li, h1, h2, h3, h4, a, .btn, .pill{ overflow-wrap: anywhere; word-break: break-word }
 
 @media (max-width: 1024px){ .card{grid-column:span 6} }
 @media (max-width: 640px){
@@ -217,6 +225,12 @@ section{padding: clamp(48px, 10vh, 72px) 0}
   .page.hero{ background: radial-gradient(190vw 150vh at 50% 10%, rgba(124,77,255,0.13), transparent 70%), var(--bg) }
 }
 
+/* Ultra-small viewport tuning */
+@media (max-width: 360px){
+  .headline{ font-size: clamp(1.75rem, 7vw, 3rem) }
+  .stat strong{ font-size: clamp(1.1rem, 5.2vw, 1.4rem) }
+}
+
 /* Section headings */
 .section-title{font-size: clamp(1.6rem, 3.5vw, 2.4rem); margin:0 0 var(--space-4)}
 .section-kicker{color:var(--muted); text-transform:uppercase; letter-spacing:.28em; font-size:.75rem}
@@ -238,7 +252,7 @@ section{padding: clamp(48px, 10vh, 72px) 0}
 .game-media{aspect-ratio: 16 / 9; background: radial-gradient(60% 50% at 60% 40%, rgba(0,229,255,0.18), transparent), radial-gradient(50% 45% at 30% 70%, rgba(124,77,255,0.18), transparent); filter:saturate(140%); display:block; margin-bottom: var(--space-3)}
 .game h3{margin: var(--space-3) var(--space-4) var(--space-2)}
 .game .meta{margin:0 var(--space-4) var(--space-4)}
-.pill{margin:0 var(--space-4) var(--space-5); display:inline-flex; align-items:center; gap: var(--space-2); padding:8px 12px; border-radius:999px; border:1px solid rgba(255,255,255,0.12); color:var(--text); text-decoration:none; font-weight:700}
+.pill{margin:0 var(--space-4) var(--space-5); display:inline-flex; align-items:center; gap: var(--space-2); padding: clamp(6px, 2vw, 8px) clamp(10px, 3vw, 12px); border-radius:999px; border:1px solid rgba(255,255,255,0.12); color:var(--text); text-decoration:none; font-weight:700; flex-wrap: wrap; white-space: normal}
 .pill:hover{border-color:rgba(255,255,255,0.25)}
 
 @media (max-width: 1024px){ .game{grid-column:span 6} }
@@ -246,8 +260,9 @@ section{padding: clamp(48px, 10vh, 72px) 0}
 
 /* Studio / Stats */
 .stats{display:grid; grid-template-columns:repeat(12,1fr); gap: var(--space-6); margin-top: var(--space-6)}
-.stat{grid-column:span 4; background:var(--glass); border:1px solid rgba(255,255,255,0.08); border-radius:16px; padding: var(--space-5)}
-.stat strong{display:block; font-size:1.6rem}
+.stat{grid-column:span 4; background:var(--glass); border:1px solid rgba(255,255,255,0.08); border-radius:16px; padding: clamp(var(--space-4), 3.5vw, var(--space-5)); display:flex; flex-direction:column}
+.stat strong{display:block; font-size: clamp(1.2rem, 4.8vw, 1.6rem); line-height: 1.2; overflow-wrap:anywhere}
+.stat .muted{ display:block; margin-top: var(--space-1); overflow-wrap:anywhere; font-size:.95rem }
 
 /* Careers */
 .roles{display:grid; grid-template-columns:repeat(12,1fr); gap: var(--space-6); margin-top: var(--space-6)}
@@ -296,6 +311,12 @@ section{padding: clamp(48px, 10vh, 72px) 0}
 
 @media (max-width: 960px){ .contact-card{grid-column:span 12} .contact-side{grid-column:span 12} }
 
+/* Stack stats on narrow screens for better readability */
+@media (max-width: 640px){
+  .stats{ gap: var(--space-4) }
+  .stat{ grid-column: span 12 }
+}
+
 /* Footer */
 footer{
   padding: var(--space-5) 0;
@@ -304,6 +325,7 @@ footer{
   background: var(--bg-2);
 }
 .footer-inner{display:flex; align-items:center; justify-content:space-between; gap: var(--space-4)}
+.footer-inner > *{ min-width: 0 }
 .social{display:flex; gap: var(--space-3)}
 .social a{color:var(--muted); text-decoration:none}
 .social a:hover{color:var(--text)}
