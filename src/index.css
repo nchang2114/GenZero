@@ -70,15 +70,9 @@ html{scrollbar-width:none}
 html, body{-ms-overflow-style:none}
 body::-webkit-scrollbar{width:0; height:0}
 
-/* Futuristic grid overlay */
+/* Futuristic grid overlay (disabled to remove texture on headings) */
 body::before{
-  content:"";
-  position:fixed; inset:0; pointer-events:none;
-  background:
-    linear-gradient(var(--line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--line) 1px, transparent 1px);
-  background-size: 60px 60px, 60px 60px;
-  opacity:.1;
+  content: none;
 }
 
 /* Aurora glow */
@@ -105,10 +99,9 @@ section{padding: clamp(48px, 10vh, 72px) 0}
 
 /* Header */
 .nav{
-  position:sticky; top:0; z-index:50;
-  backdrop-filter:saturate(140%) blur(10px);
-  background:linear-gradient(180deg, rgba(10,15,20,0.85), rgba(10,15,20,0.55));
-  border-bottom:1px solid rgba(255,255,255,0.06);
+  position:sticky; top:0; z-index:100; isolation:isolate;
+  background: var(--bg-2);
+  border-bottom:1px solid rgba(255,255,255,0.08);
 }
 .nav-inner{display:flex; align-items:center; justify-content:space-between; height:64px}
 .brand{display:flex; align-items:center; gap:12px; text-decoration:none; color:var(--text)}
