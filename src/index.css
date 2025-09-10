@@ -102,7 +102,8 @@ section{padding: clamp(48px, 10vh, 72px) 0}
   position:sticky; top:0; z-index:100; isolation:isolate;
   background: var(--bg-2);
   border-bottom:1px solid rgba(255,255,255,0.08);
-  transition: border-radius .28s ease, box-shadow .28s ease, background-color .28s ease;
+  /* Remove header transitions to avoid any perceived stagger */
+  transition: none;
 }
 .nav-inner{display:flex; align-items:center; justify-content:space-between; height:64px}
 .nav-inner{ position: relative }
@@ -119,7 +120,7 @@ section{padding: clamp(48px, 10vh, 72px) 0}
 .nav-toggle{ display:none; appearance:none; border:0; background:transparent; color:inherit; width:40px; height:40px; align-items:center; justify-content:center; cursor:pointer; border-radius:8px }
 .nav-toggle:focus-visible{ outline:2px solid rgba(0,229,255,.6); outline-offset:2px }
 .hamburger, .hamburger::before, .hamburger::after{
-  display:block; position:relative; width:22px; height:2px; background: var(--text); border-radius:2px; transition: transform .2s ease, opacity .2s ease
+  display:block; position:relative; width:22px; height:2px; background: var(--text); border-radius:2px; transition: transform .2s linear, opacity .2s linear
 }
 .hamburger::before, .hamburger::after{ content:""; position:absolute; left:0 }
 .hamburger::before{ transform: translateY(-6px) }
@@ -152,6 +153,10 @@ section{padding: clamp(48px, 10vh, 72px) 0}
 @media (max-width: 1024px){ .card{grid-column:span 6} }
 @media (max-width: 640px){
   .card{grid-column:span 12}
+}
+
+/* Expand mobile dropdown behavior to a wider breakpoint */
+@media (max-width: 840px){
   .nav-toggle{ display:inline-flex }
 
   /* Overlay dropdown: extends over content, not pushing layout */
@@ -163,35 +168,28 @@ section{padding: clamp(48px, 10vh, 72px) 0}
     border-bottom-left-radius: 14px; border-bottom-right-radius: 14px;
     box-shadow: 0 18px 40px rgba(0,0,0,.35);
     overflow:hidden;
-    max-height: 0; /* collapsed */
-    padding: 0 16px; /* animate padding on open */
-    pointer-events: none;
+    /* Keep padding constant; use clip-path for reveal without moving text */
+    padding: var(--space-3) 16px var(--space-5);
+    pointer-events: none; visibility: hidden;
     z-index: 110; /* above backdrop and content */
-    will-change: max-height, padding;
-    transition: max-height .5s cubic-bezier(0.22, 1, 0.36, 1), padding .5s cubic-bezier(0.22, 1, 0.36, 1);
+    /* Wipe reveal: mask from top to bottom */
+    clip-path: inset(0 0 100% 0);
+    -webkit-clip-path: inset(0 0 100% 0);
+    transition: clip-path .18s linear, -webkit-clip-path .18s linear, visibility 0s linear .18s;
   }
   .nav-links.open{
-    max-height: 75vh; /* extend as needed */
-    padding: var(--space-3) 16px var(--space-5);
-    pointer-events: auto;
+    clip-path: inset(0 0 0 0);
+    -webkit-clip-path: inset(0 0 0 0);
+    pointer-events: auto; visibility: visible;
+    transition: clip-path .18s linear, -webkit-clip-path .18s linear, visibility 0s linear 0s;
   }
   .nav-links a{
     display:block; color: var(--text); padding:10px 0;
-    opacity: 0; transform: translateY(-4px);
-    transition: opacity .38s ease, transform .38s ease;
   }
-  .nav-links.open a{ opacity:1; transform: none }
-  .nav-links.open a:nth-child(1){ transition-delay: .05s }
-  .nav-links.open a:nth-child(2){ transition-delay: .09s }
-  .nav-links.open a:nth-child(3){ transition-delay: .13s }
-  .nav-links.open a:nth-child(4){ transition-delay: .17s }
-
-  /* Slight rounding on header when open to match panel */
-  .nav.open{ border-bottom-left-radius: 14px; border-bottom-right-radius: 14px }
 }
 
 /* Backdrop behind open mobile menu */
-.nav-backdrop{ position:fixed; inset: var(--header-h) 0 0 0; background: rgba(0,0,0,.0); opacity:0; pointer-events:none; transition: opacity .4s cubic-bezier(0.22, 1, 0.36, 1), background .4s cubic-bezier(0.22, 1, 0.36, 1); z-index:90 }
+.nav-backdrop{ position:fixed; inset: var(--header-h) 0 0 0; background: rgba(0,0,0,.0); opacity:0; pointer-events:none; transition: opacity .18s linear, background .18s linear; z-index:90 }
 .nav-backdrop.show{ background: rgba(0,0,0,.28); opacity:1; pointer-events:auto }
 
 /* Respect reduced motion */
