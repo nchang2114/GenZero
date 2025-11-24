@@ -8,6 +8,9 @@ import Privacy from './pages/Privacy'
 import Terms from './pages/Terms'
 import Press from './pages/Press'
 import Brand from './pages/Brand'
+import Taskwatch from './pages/Taskwatch'
+import TaskwatchPrivacy from './pages/TaskwatchPrivacy'
+import TaskwatchTerms from './pages/TaskwatchTerms'
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -52,6 +55,7 @@ function App() {
           <nav id="primary-nav" className={`nav-links ${menuOpen ? 'open' : ''}`} aria-label="Primary" onClick={() => setMenuOpen(false)}>
             <Link to="/">Home</Link>
             <Link to="/games">Games</Link>
+            <Link to="/taskwatch">Taskwatch</Link>
             <Link to="/about">About Us</Link>
             <Link to="/contact">Contact</Link>
           </nav>
@@ -73,6 +77,9 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/terms" element={<Terms />} />
+        <Route path="/taskwatch" element={<Taskwatch />} />
+        <Route path="/taskwatch/privacy" element={<TaskwatchPrivacy />} />
+        <Route path="/taskwatch/terms" element={<TaskwatchTerms />} />
         <Route path="/press" element={<Press />} />
         <Route path="/brand" element={<Brand />} />
         <Route path="*" element={<Home />} />
