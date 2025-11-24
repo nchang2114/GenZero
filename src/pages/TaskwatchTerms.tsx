@@ -1,5 +1,4 @@
 import { useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import Footer from '../components/Footer'
 
 export default function TaskwatchTerms() {
@@ -13,13 +12,13 @@ export default function TaskwatchTerms() {
           <h1 className="section-title">Terms of Service</h1>
           <p className="muted">Last updated: February 2025</p>
           <div className="hero-ctas" style={{marginTop: 'var(--space-4)'}}>
-            <Link className="btn" to="/taskwatch">Back to Taskwatch</Link>
+            <a className="btn" href="https://nc-taskwatch.vercel.app" target="_blank" rel="noreferrer">Back to Taskwatch</a>
           </div>
           <div className="spacer-40" />
 
           <p className="muted"><strong>Developer / Operator:</strong> Gen Zero Studios</p>
           <p className="muted"><strong>Contact:</strong> <a href="mailto:support@taskwatch.app">support@taskwatch.app</a></p>
-          <p className="muted"><strong>Website:</strong> <a href="https://taskwatch.app" target="_blank" rel="noreferrer">taskwatch.app</a></p>
+          <p className="muted"><strong>Website:</strong> <a href="https://taskwatch.app" target="_blank" rel="noreferrer">nc-taskwatch.app</a></p>
 
           <h3>1. Acceptance of Terms</h3>
           <p className="muted">

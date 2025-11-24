@@ -1,5 +1,4 @@
 import { useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import Footer from '../components/Footer'
 
 export default function TaskwatchPrivacy() {
@@ -13,7 +12,7 @@ export default function TaskwatchPrivacy() {
           <h1 className="section-title">Privacy Policy</h1>
           <p className="muted">Last updated: February 2025</p>
           <div className="hero-ctas" style={{marginTop: 'var(--space-4)'}}>
-            <Link className="btn" to="/taskwatch">Back to Taskwatch</Link>
+            <a className="btn" href="https://nc-taskwatch.vercel.app" target="_blank" rel="noreferrer">Back to Taskwatch</a>
           </div>
           <div className="spacer-40" />
 
