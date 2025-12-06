@@ -12,7 +12,7 @@ export default function TaskwatchPrivacy() {
           <h1 className="section-title">Privacy Policy</h1>
           <p className="muted">Last updated: February 2025</p>
           <div className="hero-ctas" style={{marginTop: 'var(--space-4)'}}>
-            <a className="btn" href="https://nc-taskwatch.vercel.app" target="_blank" rel="noreferrer">Back to Taskwatch</a>
+            <a className="btn" href="https://genzero.vercel.app/taskwatch" target="_blank" rel="noreferrer">Back to Taskwatch</a>
           </div>
           <div className="spacer-40" />
 

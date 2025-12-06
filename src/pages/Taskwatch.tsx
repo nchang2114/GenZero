@@ -31,6 +31,7 @@ export default function Taskwatch() {
               <a className="btn primary" href="https://nc-taskwatch.vercel.app" target="_blank" rel="noreferrer">
                 Launch Taskwatch
               </a>
+              <Link className="btn" to="/taskwatch/policies">Terms & Policies</Link>
               <Link className="btn" to="/taskwatch/privacy">Privacy Policy</Link>
               <Link className="btn" to="/taskwatch/terms">Terms of Service</Link>
             </div>
