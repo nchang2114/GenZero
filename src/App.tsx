@@ -12,6 +12,8 @@ import Taskwatch from './pages/Taskwatch'
 import TaskwatchPrivacy from './pages/TaskwatchPrivacy'
 import TaskwatchTerms from './pages/TaskwatchTerms'
 import TaskwatchPolicies from './pages/TaskwatchPolicies'
+import TaskwatchReleaseNotes from './pages/TaskwatchReleaseNotes'
+import TaskwatchPricing from './pages/TaskwatchPricing'
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -79,7 +81,9 @@ function App() {
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/taskwatch" element={<Taskwatch />} />
+        <Route path="/taskwatch/pricing" element={<TaskwatchPricing />} />
         <Route path="/taskwatch/policies" element={<TaskwatchPolicies />} />
+        <Route path="/taskwatch/release-notes" element={<TaskwatchReleaseNotes />} />
         <Route path="/taskwatch/privacy" element={<TaskwatchPrivacy />} />
         <Route path="/taskwatch/terms" element={<TaskwatchTerms />} />
         <Route path="/press" element={<Press />} />

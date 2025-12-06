@@ -264,6 +264,50 @@ p, li, h1, h2, h3, h4, a, .btn, .pill{ overflow-wrap: anywhere; word-break: brea
 .policy-list li{ margin-bottom: var(--space-3); line-height: 1.6 }
 .policy-list li:last-child{ margin-bottom: 0 }
 
+.release-notes{ display:flex; flex-direction:column; gap: var(--space-6) }
+.release-note{
+  background: var(--card);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:16px;
+  padding: clamp(var(--space-5), 4vw, var(--space-8));
+  box-shadow: var(--shadow);
+}
+.release-date{ color: var(--muted); margin:0 0 var(--space-2); font-weight:600; letter-spacing:0.02em }
+.release-note h2{ margin: 0 0 var(--space-3); font-size: clamp(1.3rem, 3vw, 1.8rem) }
+.release-list{ margin: var(--space-4) 0; padding-left: 20px; color: var(--muted) }
+.release-list li{ margin-bottom: var(--space-3); line-height: 1.7 }
+.release-list li:last-child{ margin-bottom: 0 }
+
+.pricing-grid{
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-6);
+  align-items: stretch;
+}
+.pricing-card{
+  background: var(--card);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:18px;
+  padding: clamp(var(--space-5), 4vw, var(--space-8));
+  box-shadow: var(--shadow);
+  display:flex;
+  flex-direction:column;
+  gap: var(--space-4);
+}
+.pricing-card.highlight{ border-color: rgba(0,229,255,0.35); box-shadow: 0 15px 35px rgba(0,229,255,0.12) }
+.pricing-header h3{ margin:0 0 var(--space-2) }
+.pricing-header .muted{ margin:0 }
+.pricing-price{ display:flex; align-items:baseline; gap: var(--space-2) }
+.pricing-price .amount{ font-size: clamp(2rem, 5vw, 2.6rem); font-weight:800 }
+.pricing-price .term{ color: var(--muted); font-weight:600 }
+.feature-list{ margin:0; padding-left: 20px; color: var(--muted) }
+.feature-list li{ margin-bottom: var(--space-3); line-height: 1.7 }
+.feature-list li:last-child{ margin-bottom: 0 }
+
+@media (max-width: 720px){
+  .pricing-grid{ grid-template-columns: 1fr }
+}
+
 /* Games */
 .games{display:grid; grid-template-columns:repeat(12,1fr); gap: var(--space-6); margin-top: clamp(var(--space-6), 5vh, var(--space-8))}
 .game{grid-column:span 4; position:relative; overflow:hidden; border-radius:18px; border:1px solid rgba(255,255,255,0.1); background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02))}
