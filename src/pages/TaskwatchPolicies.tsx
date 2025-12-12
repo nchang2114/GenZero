@@ -69,7 +69,7 @@ export default function TaskwatchPolicies() {
             <div className="policy-group">
               <h3>Contact</h3>
               <ul className="policy-list">
-                <li>Questions about terms, privacy, or security: <a href="mailto:support@taskwatch.app">support@taskwatch.app</a></li>
+                <li>Questions about terms, privacy, or security: <a href="mailto:support@taskwatch.dev">support@taskwatch.dev</a></li>
                 <li>Responsible party: Gen Zero Studios (Taskwatch)</li>
               </ul>
             </div>
