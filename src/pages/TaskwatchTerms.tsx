@@ -17,8 +17,8 @@ export default function TaskwatchTerms() {
           <div className="spacer-40" />
 
           <p className="muted"><strong>Developer / Operator:</strong> Gen Zero Studios</p>
-          <p className="muted"><strong>Contact:</strong> <a href="mailto:support@taskwatch.app">support@taskwatch.app</a></p>
-          <p className="muted"><strong>Website:</strong> <a href="https://taskwatch.app" target="_blank" rel="noreferrer">nc-taskwatch.app</a></p>
+          <p className="muted"><strong>Contact:</strong> <a href="mailto:support@taskwatch.dev">support@taskwatch.dev</a></p>
+          <p className="muted"><strong>Website:</strong> <a href="https://nc-taskwatch.vercel.app" target="_blank" rel="noreferrer">nc-taskwatch.vercel.app</a></p>
 
           <h3>1. Acceptance of Terms</h3>
           <p className="muted">
@@ -137,7 +137,7 @@ export default function TaskwatchTerms() {
 
           <h3>17. Contact</h3>
           <p className="muted">
-            For questions about these Terms, contact Gen Zero Studios at <a href="mailto:support@taskwatch.app">support@taskwatch.app</a>.
+            For questions about these Terms, contact Gen Zero Studios at <a href="mailto:support@taskwatch.dev">support@taskwatch.dev</a>.
           </p>
         </div>
         <Footer />
