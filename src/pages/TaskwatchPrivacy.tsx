@@ -17,7 +17,7 @@ export default function TaskwatchPrivacy() {
           <div className="spacer-40" />
 
           <p className="muted"><strong>Developer:</strong> Gen Zero Studios</p>
-          <p className="muted"><strong>Contact:</strong> <a href="mailto:support@taskwatch.app">support@taskwatch.app</a></p>
+          <p className="muted"><strong>Contact:</strong> <a href="mailto:support@taskwatch.dev">support@taskwatch.dev</a></p>
 
           <h3>1. Introduction</h3>
           <p className="muted">
@@ -103,7 +103,7 @@ export default function TaskwatchPrivacy() {
           <p className="muted">Service providers may process and store data in regions outside your country. All transfers comply with applicable data protection laws and security standards.</p>
 
           <h3>8. Children’s Privacy</h3>
-          <p className="muted">Taskwatch is not intended for children under 13. We do not knowingly collect information from children under 13. If you believe a child has created an account, contact <a href="mailto:support@taskwatch.app">support@taskwatch.app</a> to request deletion.</p>
+          <p className="muted">Taskwatch is not intended for children under 13. We do not knowingly collect information from children under 13. If you believe a child has created an account, contact <a href="mailto:support@taskwatch.dev">support@taskwatch.dev</a> to request deletion.</p>
 
           <h3>9. Data Retention</h3>
           <p className="muted">We retain your information for as long as your account remains active. If you delete your account, we delete your authentication record and all user-generated data. Some security logs may be retained temporarily for fraud prevention.</p>
@@ -117,7 +117,7 @@ export default function TaskwatchPrivacy() {
             <li>Request a copy of your data (export)</li>
             <li>Withdraw consent to data processing</li>
           </ul>
-          <p className="muted">For any request, contact <a href="mailto:support@taskwatch.app">support@taskwatch.app</a>.</p>
+          <p className="muted">For any request, contact <a href="mailto:support@taskwatch.dev">support@taskwatch.dev</a>.</p>
 
           <h3>11. Account Deletion</h3>
           <p className="muted">You may delete your Taskwatch account at any time through the app’s settings. Upon deletion, all associated data stored in Supabase is permanently removed.</p>
@@ -133,7 +133,7 @@ export default function TaskwatchPrivacy() {
 
           <h3>14. Contact Us</h3>
           <p className="muted">
-            If you have questions or privacy concerns, contact Gen Zero Studios at <a href="mailto:support@taskwatch.app">support@taskwatch.app</a>.
+            If you have questions or privacy concerns, contact Gen Zero Studios at <a href="mailto:support@taskwatch.dev">support@taskwatch.dev</a>.
           </p>
         </div>
         <Footer />
